@@ -23,6 +23,16 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true
-  }
+    historyApiFallback: true,
+    proxy: {
+           '/api': {
+             target: 'http://143.215.114.174:8080',
+             changeOrigin: true,
+             secure:false,
+             pathRewrite:{
+               '^/api':''
+             }
+           }
+         }
+          }
 };

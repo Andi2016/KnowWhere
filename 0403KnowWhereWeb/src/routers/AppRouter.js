@@ -19,6 +19,7 @@ const AppRouter= () => (
         <Route path="/nearby" component={NearbyPage} />
         <Route path="/contacts" component={ContactsPage} />
         <Route path="/chat" component={ChatPage} />
+        <Route path="/register" component={RegisterPage} />
         </Switch>
     </div>
     </BrowserRouter>
