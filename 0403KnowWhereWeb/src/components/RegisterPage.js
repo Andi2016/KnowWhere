@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Fetch from 'react-fetch';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
-axios.defaults.baseURL = 'http://143.215.114.174:8080';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://143.215.114.174:8080/user';
-
+//axios.defaults.baseURL = 'http://143.215.114.174:8080';
+//axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+//axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+/*
 let axiosConfig = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -15,8 +16,19 @@ let axiosConfig = {
         'Access-Control-Allow-Method': 'POST, GET'
     },
     withCredentials: true
-  };
-
+  };*/
+function postData(url, data){
+    return fetch(url, {
+        body: JSON.stringify(data),
+        credentials: 'include',
+        headers:{ 'content-type': 'application/json'},
+        method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
+        referrer: 'no-referrer'
+    })
+    .then(response=> response.json())
+}
 
   export default class RegisterPage extends React.Component {
     constructor(props) {
@@ -53,12 +65,13 @@ let axiosConfig = {
             firstname:'',
             lastname:''
         }; 
-        axios.post(`/user`, {user}, axiosConfig)
-        .then(res => {
+        postData('http://http://143.215.114.174:8080/user', {user});
+        //axios.post(`/user`, {user}, axiosConfig)
+        //.then(res => {
             //res.setContentType('application/json');
-            console.log(res);
-            console.log(res.data);
-        })
+            //console.log(res);
+            //console.log(res.data);
+        //})
     }
  
     render() {
