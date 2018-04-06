@@ -5,19 +5,9 @@ import axios from 'axios';
 import Fetch from 'react-fetch';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
-//axios.defaults.baseURL = 'http://143.215.114.174:8080';
-//axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-//axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-/*
-let axiosConfig = {
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Method': 'POST, GET'
-    },
-    withCredentials: true
-  };*/
-function postData(url, data){
+
+
+/**function postData(url, data){
     return fetch(url, {
         body: JSON.stringify(data),
         credentials: 'include',
@@ -28,66 +18,108 @@ function postData(url, data){
         referrer: 'no-referrer'
     })
     .then(response=> response.json())
-}
+} */
 
   export default class RegisterPage extends React.Component {
+    
     constructor(props) {
         super(props);
  
         this.state = {           
-                username: '',
-                firstname:'',
-                lastname:'',
-                password: '',
-                email: ''
+                username: props.username?props.username:'',
+                firstname:props.firstname?props.firstname:'',
+                lastname:props.lastname?props.lastname:'',
+                password: props.password?props.password:'',
+                email: props.email? props.email : ''
         };
  
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onFirstnameChange = this.onFirstnameChange.bind(this);
+        this.onLastnameChange = this.onLastnameChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onUsernameChange = this.onUsernameChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
  
-    handleChange(event) {
-        this.setState({
-            username: event.target.value.username,
-            password: event.target.value.password,
-            email: event.target.value.email,
-            firstname:'testfirstname',
-            lastname:'testlastname'
-        });
+    onUsernameChange(e) {
+        this.setState({username: e.target.value});   
     }
    
-    handleSubmit(event) {
+    onEmailChange(event) {
+        this.setState({
+            email: event.target.value
+        });   
+    }
+
+    onPasswordChange(event) {
+        this.setState({
+            password: event.target.value
+        });  
+    }
+
+    onFirstnameChange(event) {
+        this.setState({
+            firstname: event.target.value
+        });
+    }
+
+    onLastnameChange(event) {
+        this.setState({
+            lastname: event.target.value
+        });
+    }
+
+    onSubmit(event) {
         event.preventDefault();
+        //console.log("user:");
+        //console.log(this.state);
         const user = {
             username: this.state.username,
             password: this.state.password,
-            email: this.state.email,
-            firstname:'',
-            lastname:''
+            email:this.state.email,
+            firstname:this.state.firstname,
+            lastname:this.state.lastname
         }; 
-        postData('http://http://143.215.114.174:8080/user', {user});
-        //axios.post(`/user`, {user}, axiosConfig)
-        //.then(res => {
+        
+        axios.defaults.baseURL = 'http://143.215.114.174:8080';
+        axios.defaults.headers.get['Content-Type'] = 'application/json';
+        axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+
+        let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Method': 'POST, GET, OPTIONS, PUT, DELETE'
+        },
+            withCredentials: true
+        };
+        //postData('http://143.215.114.174:8080/user', {user});
+        axios.post(`/user`, {user}, axiosConfig)
+        //axios.get('/user')
+        .then(function(response) {
             //res.setContentType('application/json');
-            //console.log(res);
-            //console.log(res.data);
-        //})
+            console.log(response);
+            console.log(response.data);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
     }
  
     render() {
-        const user = this.state;
         return (
             <div>
                 <h3>Register</h3>
-                <form name="form" onSubmit={this.handleSubmit}>
+                <form name="form" onSubmit={this.onSubmit}>
                     <FormGroup controlId="username" >
                         <ControlLabel>Username: </ControlLabel>
                         <FormControl autoFocus 
                         type="text" 
                         className="text-input" 
                         placeholder = "Username"
-                        name="username" 
-                        onChange={this.handleChange} 
+                        value= {this.state.username}
+                        onChange={this.onUsernameChange} 
                         />
                     </FormGroup>
 
@@ -97,8 +129,8 @@ function postData(url, data){
                         type="text" 
                         className="text-input" 
                         placeholder="Email" 
-                        name="email"
-                        onChange={this.handleChange} 
+                        value={this.state.email}
+                        onChange={this.onEmailChange} 
                         />
                     </FormGroup>
 
@@ -108,8 +140,8 @@ function postData(url, data){
                         type="text" 
                         className="text-input"  
                         placeholder="Password" 
-                        name="password"
-                        onChange={this.handleChange} 
+                        value={this.state.password}
+                        onChange={this.onPasswordChange} 
                         />
                     </FormGroup>
 
@@ -119,8 +151,8 @@ function postData(url, data){
                         type="text" 
                         className="text-input" 
                         placeholder="Firstname" 
-                        name="firstname"
-                        onChange={this.handleChange} 
+                        value={this.state.firstname}
+                        onChange={this.onFirstnameChange} 
                         />
                     </FormGroup>
 
@@ -129,9 +161,9 @@ function postData(url, data){
                         <FormControl autoFocus 
                         type="text" 
                         className="text-input"  
-                        placeholder="Lastname" 
-                        name="lastname"
-                        onChange={this.handleChange} 
+                        placeholder="Lastname"
+                        value={this.state.lastname} 
+                        onChange={this.onLastnameChange} 
                         />
                     </FormGroup>
                     <div>

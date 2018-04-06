@@ -20,6 +20,7 @@ class HomePage extends React.Component {
              <FormControl autoFocus type="text" /></FormGroup>
 
              <Button block type="submit">Login</Button>
+             
             </form>            
             <Link to="/register">Register</Link>  
         </div>
