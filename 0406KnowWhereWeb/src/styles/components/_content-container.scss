@@ -1,0 +1,16 @@
+.content-container {
+  margin: 0 auto;
+  padding: 0 $m-size;
+  max-width: 80rem;
+}
+
+.content-container__groupname{
+  background-color: fade-out($color: #0d742c, $amount: 0.15);
+  height: 30px;
+  font: 100;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  text-align: left;
+}

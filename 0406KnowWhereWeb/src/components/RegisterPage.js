@@ -5,21 +5,6 @@ import axios from 'axios';
 import Fetch from 'react-fetch';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
-
-
-/**function postData(url, data){
-    return fetch(url, {
-        body: JSON.stringify(data),
-        credentials: 'include',
-        headers:{ 'content-type': 'application/json'},
-        method: 'POST',
-        mode: 'cors',
-        redirect: 'follow',
-        referrer: 'no-referrer'
-    })
-    .then(response=> response.json())
-} */
-
   export default class RegisterPage extends React.Component {
     
     constructor(props) {
@@ -94,11 +79,8 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
         },
             withCredentials: true
         };
-        //postData('http://143.215.114.174:8080/user', {user});
         axios.post(`/user`, {user}, axiosConfig)
-        //axios.get('/user')
         .then(function(response) {
-            //res.setContentType('application/json');
             console.log(response);
             console.log(response.data);
         })

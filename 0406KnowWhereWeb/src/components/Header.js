@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import NearbyPage from './NearbyPage';
 import ContactsPage from './ContactsPage';
-import ChatPage from './ChatPage';
+import ProfilePage from './ProfilePage';
 
 const Header = () => (
   <header className="header-define">

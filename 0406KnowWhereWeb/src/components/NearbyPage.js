@@ -1,16 +1,18 @@
 import React from 'react';
-import PostBoard from './PostBoard';
-import PostFilter from './PostFilter';
 import NearbyList from './NearbyList';
 import PrivateHeader from './PrivateHeader';
 
-const NearbyPage = () => (
-    <div>
+class NearbyPage extends React.Component{
+  render(){
+    return (
+      <div>
       <PrivateHeader />
-      <PostBoard />
-      <PostFilter />
       <NearbyList />
     </div>
-);
+    );
+  }
+}
+    
+
 
 export default NearbyPage;
