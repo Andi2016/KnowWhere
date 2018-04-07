@@ -8,26 +8,24 @@ import history from './history';
 import { logIn } from '../actions/userAction'
 
 
-class HomePage extends React.Component{
-    onSubmit=(user)=>{
-        console.log("onSubmit: ", user);
-    }
-    render(){
-        return (
-        <div className="box-layout">
-         <div className="box-layout__box">
-          <p className="header__login">Know Where Your Friends Are</p>
-          <LogInForm 
-             onSubmit={this.onSubmit} />
-          <Link to="/register">Register</Link>
-         </div>
-        </div>
-        );
-    }
-}
+const HomePage = (props) => (
+    <div className="box-layout">
+    <div className="box-layout__box">
+     <p className="header__login">Know Where Your Friends Are</p>
+     <LogInForm 
+        onSubmit={(user)=>{
+            props.dispatch(logIn(user))
+            props.history.push('/profile')
+        }} />
+     <Link to="/register">Register</Link>
+    </div>
+   </div>
+);
 
-const mapDispatchToProps = (dispatch) => ({
-    logIn: (user) => dispatch(logIn(user))
-});
 
-export default connect(undefined, mapDispatchToProps)(HomePage);
+//const mapDispatchToProps = (dispatch) => ({
+    //logIn: (user) => dispatch(logIn(user))
+//});
+
+//export default connect(undefined, mapDispatchToProps)(HomePage);
+export default connect()(HomePage)
