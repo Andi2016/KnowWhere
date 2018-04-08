@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +22,14 @@ import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
 import com.google.gson.Gson;
 
+
 public class HomeFragment extends Fragment {
 
     //UI references
     private TextView mUsernameView;
     private Switch mStatusView;
+
+    private ImageView mHeadView;
 
     private String mUsername;
     private User mUser;
@@ -48,9 +52,9 @@ public class HomeFragment extends Fragment {
 
         mUsernameView = view.findViewById(R.id.username_profile);
         mStatusView = view.findViewById(R.id.switch_view);
-
         Bundle bundle = getArguments();
         mUsername = bundle.getString("username");
+
         mUsernameView.setText(mUsername);
 
         getStatus();

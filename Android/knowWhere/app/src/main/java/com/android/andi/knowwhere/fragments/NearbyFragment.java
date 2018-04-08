@@ -5,6 +5,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
@@ -28,6 +29,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.andi.knowwhere.R;
+import com.android.andi.knowwhere.activities.ChatActivity;
 import com.android.andi.knowwhere.adapters.NearbyListAdapter;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Coordinate;
@@ -56,6 +58,7 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
 
     private double mLatitude;
     private double mLongitude;
+    private ArrayList<Post> list = new ArrayList<>();
 
     public static NearbyFragment newInstance() {
         NearbyFragment fragment = new NearbyFragment();
@@ -86,8 +89,18 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
         setupView();
         getNearbyInfo();
         //getCoordinate();
-        mLongitude = -84.783495;
-        mLatitude = 32.7632058;
+
+        //Alice - Clough
+//        mLongitude = -84.3962849;
+//        mLatitude = 33.7749203;
+
+        //Joe - Klaus
+        mLongitude = -84.3962849;
+        mLatitude = 33.7772515;
+
+        //Tina -CRC
+//        mLongitude = -84.4024941;
+//        mLatitude = 33.7755503;
 
         return view;
     }
@@ -179,7 +192,6 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
                 if(response.statusCode == ServerAPI.STATUS_OK){
                     //postList.clear();
                     try{
-                        ArrayList<Post> list = new ArrayList<>();
                         JSONArray jsonArray = new JSONArray(response.responseData);
                         mPostCount = jsonArray.length();
                         if(mPostCount == 0){
@@ -235,6 +247,7 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
                                 @Override
                                 public void onResponse(ServerResponseData response) {
                                     if(response.statusCode == ServerAPI.STATUS_OK){
+                                        list.clear();
                                         getNearbyInfo();
                                     }
 
@@ -258,7 +271,12 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
 
     @Override
     public void OnClick(int position) {
-
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
+        String username2 = list.get(position).getUsername();
+        String group_name = mUsername.compareTo(username2) < 0 ? mUsername + "|" + username2 : username2 + "|" + mUsername;
+        intent.putExtra("groupname", group_name);
+        startActivity(intent);
     }
+
 
 }

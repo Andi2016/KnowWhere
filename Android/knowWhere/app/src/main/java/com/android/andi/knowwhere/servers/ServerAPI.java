@@ -262,4 +262,61 @@ public class ServerAPI {
         }
     }
 
+    /**
+     * This function get all friends of user
+     */
+    public static void getFriends(Context context, String username, ServerResponseCallback callback){
+        String url = "/user/" + username + "/friend";
+
+        try{
+            ServerInterface request = new ServerInterface(url, callback);
+            request.execute(context, null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void createGroup(Context context, String groupName, String username, ServerResponseCallback callback){
+        String url = "/user/" + username + "/group";
+
+        try{
+            JSONObject top = new JSONObject();
+            top.put("groupname", groupName);
+            top.put("description", "");
+            top.put("username", username);
+            ServerInterface request = new ServerInterface(url, callback);
+            request.executePostJSON(context, top);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void addFriend(Context context, String username, String friendName, ServerResponseCallback callback){
+        String url = "/user/friend";
+
+        try{
+            JSONObject top = new JSONObject();
+            top.put("username1", username);
+            top.put("username2", friendName);
+            ServerInterface request = new ServerInterface(url, callback);
+            request.executePostJSON(context, top);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void addFriendtoGroup(Context context, String groupName, String username, ServerResponseCallback callback){
+        String url = "/group/" + groupName;
+
+        try{
+            JSONObject top = new JSONObject();
+            top.put("username", username);
+            ServerInterface request = new ServerInterface(url, callback);
+            request.executePostJSON(context, top);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -11,8 +11,14 @@ import android.widget.TextView;
 import com.android.andi.knowwhere.R;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Chat;
+import com.android.andi.knowwhere.models.User;
+import com.android.andi.knowwhere.utils.Basics;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,12 +30,14 @@ public class  ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewH
     private List<Chat> mChatList;
     private Context mContext;
     private KnowWhere mApp;
+    private User mUser;
     private ChatListAdapter.ChatListAdapterListener mListener;
 
     public ChatListAdapter(Context context, ChatListAdapter.ChatListAdapterListener listener){
         mContext = context;
         mChatList = new ArrayList<>();
         mApp = (KnowWhere) mContext.getApplicationContext();
+        mUser = mApp.getPreference().getUser(mApp);
         mListener = listener;
     }
 
@@ -61,12 +69,18 @@ public class  ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewH
     @Override
     public void onBindViewHolder(ChatListAdapter.ViewHolder holder, final int position) {
         Chat chat = mChatList.get(position);
+        String name_display = chat.getGroupname();
+        if(chat.getGroupname().contains("%7C")){
+            name_display = chat.getGroupname().replaceAll("%7C","").replaceAll(mUser.getUsername(), "");
+        }
         //change later
         holder.mHeadImage.setImageResource(R.drawable.head_alice);
 
-        holder.mNameView.setText(chat.getGroupname());
+        holder.mNameView.setText(name_display);
         holder.mMessageView.setText(chat.getSender()+": "+ chat.getContent());
-        holder.mTimeView.setText(chat.getTimeStamp());
+
+        String time = Basics.stamp2Date(chat.getTimeStamp(), "MM-dd HH:mm");
+        holder.mTimeView.setText(time);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

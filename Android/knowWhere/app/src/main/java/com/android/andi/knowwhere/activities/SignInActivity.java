@@ -65,7 +65,7 @@ public class SignInActivity extends AppCompatActivity {
         /**
          * This function attempts to sign up
          */
-        private void attemptSignIn(){
+        private void attemptSignIn() {
 
             //reset errors
             mEmailView.setError(null);
@@ -113,8 +113,9 @@ public class SignInActivity extends AppCompatActivity {
                     mApp.getPreference().storeUser(mApp, mUser);
 
                     startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                    finish();
                 }else{
-                    Toast.makeText(mApp, "Wrong Password", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mApp, "Wrong Password", Toast.LENGTH_SHORT).show();
                 }
             }
 

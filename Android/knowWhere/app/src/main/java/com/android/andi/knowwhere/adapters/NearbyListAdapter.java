@@ -60,7 +60,7 @@ public class  NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.V
     }
 
     @Override
-    public void onBindViewHolder(NearbyListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(NearbyListAdapter.ViewHolder holder, final int position) {
         Post post = mPostList.get(position);
         //change later
         holder.mHeadImage.setImageResource(R.drawable.head_alice);
@@ -69,6 +69,14 @@ public class  NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.V
         DecimalFormat df = new DecimalFormat("0.00");
         holder.mDistanceView.setText(df.format(post.getDistance()*1000)+" m");
         holder.mPostView.setText(post.getWhatsup());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.OnClick(position);
+            }
+        });
+
     }
 
     @Override

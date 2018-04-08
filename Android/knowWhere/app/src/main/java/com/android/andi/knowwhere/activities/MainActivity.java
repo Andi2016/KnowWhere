@@ -1,5 +1,9 @@
 package com.android.andi.knowwhere.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -7,20 +11,28 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.andi.knowwhere.R;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.fragments.ChatFragment;
+import com.android.andi.knowwhere.fragments.ContactFragment;
 import com.android.andi.knowwhere.fragments.HomeFragment;
 import com.android.andi.knowwhere.fragments.NearbyFragment;
 import com.android.andi.knowwhere.models.User;
+import com.android.andi.knowwhere.servers.ServerAPI;
+import com.android.andi.knowwhere.servers.ServerResponseCallback;
+import com.android.andi.knowwhere.servers.ServerResponseData;
 
 public class MainActivity extends AppCompatActivity {
 
     private KnowWhere mApp;
     private User mUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                                 setupActionBar(1);
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = NearbyFragment.newInstance();
+                                selectedFragment = ContactFragment.newInstance();
                                 selectedFragment.setArguments(bundle);
                                 setupActionBar(2);
                                 break;
@@ -93,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle("Contact");
                     break;
                 case 3:
-                    getSupportActionBar().setTitle("Nearby");
+                    getSupportActionBar().setTitle("Nearby Posts");
                     break;
                 case 4:
                     getSupportActionBar().setTitle("Chat");
@@ -102,5 +114,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_logout:
+                logout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    private void logout(){
+        mApp.getPreference().setAppState(MainActivity.this,false);
+        mApp.getPreference().storeUser(MainActivity.this,null);
+        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        finish();
+    }
+
+
+
+
 
 }

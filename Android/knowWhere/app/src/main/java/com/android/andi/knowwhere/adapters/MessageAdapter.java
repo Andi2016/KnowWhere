@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.android.andi.knowwhere.R;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Chat;
+import com.android.andi.knowwhere.utils.Basics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,12 +70,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.mLeftHeadImage.setImageResource(R.drawable.head_joe);
             holder.mSenderNameView.setText(chat.getSender());
             holder.mSenderMessageView.setText(chat.getContent());
-            holder.mSenderTimeView.setText(chat.getTimeStamp());
+
+            String time = Basics.stamp2Date(chat.getTimeStamp(), "MM-dd HH:mm");
+            holder.mSenderTimeView.setText(time);
         }else{
             holder.mRightLayoutView.setVisibility(View.VISIBLE);
             holder.mLeftLayoutView.setVisibility(View.GONE);
             holder.mUserMessageView.setText(chat.getContent());
-            holder.mUserTimeView.setText(chat.getTimeStamp());
+
+            String time = Basics.stamp2Date(chat.getTimeStamp(), "MM-dd HH:mm");
+            holder.mUserTimeView.setText(time);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
