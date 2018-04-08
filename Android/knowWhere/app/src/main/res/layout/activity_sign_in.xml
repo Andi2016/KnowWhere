@@ -13,7 +13,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@drawable/logo_white"
+        <ImageView android:src="@drawable/logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginBottom="24dp"
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:hint="Username" />
         </android.support.design.widget.TextInputLayout>
 
         <!--  Password Label -->

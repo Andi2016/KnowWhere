@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.andi.knowwhere.R;
+import com.android.andi.knowwhere.activities.MainActivity;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Chat;
 import com.android.andi.knowwhere.utils.Basics;
@@ -67,7 +68,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         if(!chat.getSender().equals(mApp.getPreference().getUser(mApp).getUsername())){
             holder.mLeftLayoutView.setVisibility(View.VISIBLE);
             holder.mRightLayoutView.setVisibility(View.GONE);
-            holder.mLeftHeadImage.setImageResource(R.drawable.head_joe);
+            holder.mLeftHeadImage.setImageResource(MainActivity.map.get(chat.getSender()));
             holder.mSenderNameView.setText(chat.getSender());
             holder.mSenderMessageView.setText(chat.getContent());
 

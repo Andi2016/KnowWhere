@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.andi.knowwhere.R;
+import com.android.andi.knowwhere.activities.MainActivity;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Contact;
 import com.android.andi.knowwhere.models.Post;
@@ -66,7 +67,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         //Contact contact = mContactList.get(position);
         String contact = mContactList.get(position);
         //change later
-        holder.mHeadImage.setImageResource(R.drawable.head_tina);
+        holder.mHeadImage.setImageResource(MainActivity.map.get(contact));
 
         holder.mNameView.setText(contact);
 

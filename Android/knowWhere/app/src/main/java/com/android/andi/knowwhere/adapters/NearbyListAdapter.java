@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.andi.knowwhere.R;
+import com.android.andi.knowwhere.activities.MainActivity;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Post;
 
@@ -63,7 +64,7 @@ public class  NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.V
     public void onBindViewHolder(NearbyListAdapter.ViewHolder holder, final int position) {
         Post post = mPostList.get(position);
         //change later
-        holder.mHeadImage.setImageResource(R.drawable.head_alice);
+        holder.mHeadImage.setImageResource(MainActivity.map.get(post.getUsername()));
 
         holder.mNameView.setText(post.getUsername());
         DecimalFormat df = new DecimalFormat("0.00");

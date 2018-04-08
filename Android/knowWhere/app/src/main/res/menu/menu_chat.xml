@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_invite"
         android:orderInCategory="0"
-        android:icon="@drawable/plus_button"
+        android:icon="@mipmap/ic_add"
         android:title="Invite Other"
         app:showAsAction="ifRoom" />
 

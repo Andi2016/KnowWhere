@@ -91,12 +91,12 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
         //getCoordinate();
 
         //Alice - Clough
-//        mLongitude = -84.3962849;
-//        mLatitude = 33.7749203;
+        mLongitude = -84.3962849;
+        mLatitude = 33.7749203;
 
         //Joe - Klaus
-        mLongitude = -84.3962849;
-        mLatitude = 33.7772515;
+//        mLongitude = -84.3962849;
+//        mLatitude = 33.7772515;
 
         //Tina -CRC
 //        mLongitude = -84.4024941;

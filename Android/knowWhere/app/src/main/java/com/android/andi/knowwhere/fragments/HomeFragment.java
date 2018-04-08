@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.andi.knowwhere.R;
+import com.android.andi.knowwhere.activities.MainActivity;
 import com.android.andi.knowwhere.models.User;
 import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerInterface;
@@ -52,10 +53,12 @@ public class HomeFragment extends Fragment {
 
         mUsernameView = view.findViewById(R.id.username_profile);
         mStatusView = view.findViewById(R.id.switch_view);
+        mHeadView = view.findViewById(R.id.head_profile);
         Bundle bundle = getArguments();
         mUsername = bundle.getString("username");
 
         mUsernameView.setText(mUsername);
+        mHeadView.setImageResource(MainActivity.map.get(mUsername));
 
         getStatus();
 

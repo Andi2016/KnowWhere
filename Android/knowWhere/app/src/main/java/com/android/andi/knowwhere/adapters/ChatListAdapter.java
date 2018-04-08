@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.andi.knowwhere.R;
+import com.android.andi.knowwhere.activities.MainActivity;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Chat;
 import com.android.andi.knowwhere.models.User;
@@ -74,7 +75,7 @@ public class  ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewH
             name_display = chat.getGroupname().replaceAll("%7C","").replaceAll(mUser.getUsername(), "");
         }
         //change later
-        holder.mHeadImage.setImageResource(R.drawable.head_alice);
+        holder.mHeadImage.setImageResource(MainActivity.map.get(chat.getSender()));
 
         holder.mNameView.setText(name_display);
         holder.mMessageView.setText(chat.getSender()+": "+ chat.getContent());

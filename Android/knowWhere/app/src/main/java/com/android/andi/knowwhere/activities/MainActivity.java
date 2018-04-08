@@ -28,10 +28,15 @@ import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     private KnowWhere mApp;
     private User mUser;
+
+    public static Map<String, Integer> map = new HashMap<>();
 
 
     @Override
@@ -41,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         mApp = (KnowWhere) getApplicationContext();
         mUser = mApp.getPreference().getUser(mApp.getApplicationContext());
+
+        map.put("Alice", R.drawable.head_alice);
+        map.put("Joe", R.drawable.head_joe);
+        map.put("Tina", R.drawable.head_tina);
+        map.put("Bob", R.drawable.head_bob);
+        map.put("Smith", R.drawable.head_smith);
+        map.put("Jane", R.drawable.head_jane);
 
         final Bundle bundle = new Bundle();
         bundle.putString("username", mUser.getUsername());
