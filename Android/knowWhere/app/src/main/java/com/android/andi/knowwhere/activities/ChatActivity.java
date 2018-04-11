@@ -34,6 +34,11 @@ import com.android.andi.knowwhere.models.User;
 import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -68,6 +73,8 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
         }
     };
 
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,13 +91,35 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
         group_name = intent.getStringExtra("groupname");
 
         setUpActionBar();
+        //getFireBaseData();
         setupView();
         fetchMessages();
         sendMessage();
 
         //temp
-       handler.postDelayed(task, 5000);
+       //handler.postDelayed(task, 5000);
     }
+
+    /**
+     * This function listens to new message
+     */
+//    private void getFireBaseData(){
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        DatabaseReference firebaseUser = mDatabase.child("test");
+//        firebaseUser.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Log.e("change", "changed");
+//                fetchMessages();
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 
 
 
@@ -144,7 +173,7 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                handler.removeCallbacks(task);
+                //handler.removeCallbacks(task);
                 finish();
                 break;
             case R.id.action_invite:
@@ -213,6 +242,7 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
                     public void onResponse(ServerResponseData response) {
                         if(response.statusCode == ServerAPI.STATUS_OK){
                             fetchMessages();
+                            mChatboxView.setText("");
                         }
                     }
                 });

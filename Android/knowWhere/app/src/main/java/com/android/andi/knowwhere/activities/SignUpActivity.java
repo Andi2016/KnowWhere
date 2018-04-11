@@ -140,6 +140,7 @@ public class SignUpActivity extends AppCompatActivity {
         ServerAPI.createUser(mApp.getApplicationContext(), fName, lName, email, new ServerResponseCallback() {
             @Override
             public void onResponse(ServerResponseData response) {
+                Log.e("ffd", response.responseData+ " ");
                 if (response.statusCode == ServerAPI.STATUS_OK) {
                     User user = new Gson().fromJson(response.responseData, User.class);
 

@@ -25,12 +25,19 @@ import com.android.andi.knowwhere.models.Chat;
 import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+
+
 
 public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAdapterListener{
 
@@ -55,6 +62,11 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         ChatFragment fragment = new ChatFragment();
         return fragment;
     }
+
+    private DatabaseReference mDatabase;
+    private DatabaseReference FirebaseUser;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +93,12 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         setupView();
         fetchAllGroups();
 
-        handler.postDelayed(task, 5000);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser = mDatabase.child(mUsername);
+
+        getFireBaseData();
+
+        //handler.postDelayed(task, 5000);
 
         return view;
     }
@@ -136,6 +153,24 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         });
     }
 
+    private void getFireBaseData(){
+
+
+        FirebaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                list.clear();
+                fetchAllGroups();
+                Log.e("firebase", "valuechanged");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void createGroup(){
         AlertDialog.Builder builder;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -171,6 +206,7 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
                         }
                     }
                 });
+                FirebaseUser.setValue("aa");
             }
         })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {

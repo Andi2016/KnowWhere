@@ -21,7 +21,17 @@ import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerInterface;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+
+
+import java.util.HashMap;
+
+import static android.content.ContentValues.TAG;
 
 
 public class HomeFragment extends Fragment {
@@ -35,6 +45,8 @@ public class HomeFragment extends Fragment {
     private String mUsername;
     private User mUser;
     private String mStatus = "";
+
+    private FirebaseDatabase mDatabase;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -58,6 +70,8 @@ public class HomeFragment extends Fragment {
         mUsername = bundle.getString("username");
 
         mUsernameView.setText(mUsername);
+        getFireBaseData();
+        Log.e("dfsf", mUsername+"  ");
         mHeadView.setImageResource(MainActivity.map.get(mUsername));
 
         getStatus();
@@ -77,6 +91,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
 
     private void getStatus(){
         ServerAPI.getUserByUsername(getActivity(), mUsername, new ServerResponseCallback() {
@@ -106,6 +121,27 @@ public class HomeFragment extends Fragment {
         ServerAPI.updateStatus(getActivity(), mUsername, status, new ServerResponseCallback() {
             @Override
             public void onResponse(ServerResponseData response) {
+
+            }
+        });
+    }
+
+    private void getFireBaseData(){
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference test = mDatabase.getReference("test");
+
+        test.setValue("hekko");
+
+        test.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("firebase", "valuechanged");
+                mUsernameView.setText(dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
