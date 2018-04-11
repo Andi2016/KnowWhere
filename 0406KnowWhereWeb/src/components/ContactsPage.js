@@ -28,8 +28,11 @@ class ContactsPage extends React.Component{
         this.onClick = this.onClick.bind(this);
     }
     onClick(){
-        console.log("onClck")
-        axios.get(`/user/${this.state.username}/friend`, axiosConfig)
+        console.log("onClick")
+        
+        const uname = this.state.username;
+        console.log(uname);
+        axios.get(`/user/${uname}/friend`, axiosConfig)
              .then((response)=>{
                  console.log(response);
                  //console.log(response.data);
@@ -48,7 +51,7 @@ class ContactsPage extends React.Component{
             <div>
             <PrivateHeader />
             ContactsPage
-            { console.log(this.props.username) }
+            {this.props.username}
             <button onClick={this.onClick}>button</button>
               {
                   this.state.friends.map((friend) => <li key={friend}> {friend} <Link to="/chat/:{friend}">CHAT</Link></li>)
@@ -59,8 +62,8 @@ class ContactsPage extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    username:state.username,
-    password:state.password
+    username:state.user.username,
+    password:state.user.password
 })
 
 

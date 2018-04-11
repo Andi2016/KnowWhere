@@ -31,14 +31,11 @@ class HomePage extends React.Component{
     }
 }
 
-const mapStateToProps = state => ({
-    username:state.username,
-    password:state.password
-})
+
 
 const mapDispatchToProps = (dispatch) => ({
     logIn: (user) => dispatch(logIn(user))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(undefined, mapDispatchToProps)(HomePage);
 //export default connect()(HomePage)

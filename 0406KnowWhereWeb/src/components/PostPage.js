@@ -36,7 +36,7 @@ export default class PostPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            username: 'joe',
+            username: '',
             postText: props.postText ? props.postText : '',
             lattitude: '',
             longitude: '',

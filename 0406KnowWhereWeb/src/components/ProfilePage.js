@@ -3,6 +3,9 @@ import PrivateHeader from './PrivateHeader';
 import { connect } from "react-redux";
 
 class ProfilePage extends React.Component{
+    constructor(props){
+        super(props);
+    }
     render(){
         return (
             <div>
@@ -16,8 +19,8 @@ class ProfilePage extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        username: state.username,
-        password: state.password
+        username: state.user.username,
+        password: state.user.password
     }
 }
 

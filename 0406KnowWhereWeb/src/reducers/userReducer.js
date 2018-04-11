@@ -23,8 +23,8 @@ export default (state = userReducerDefaultState, action) => {
       case 'LOGIN':
         return {
           ...state,
-          username: action.username,
-          password: action.password
+          username: action.user.username,
+          password: action.user.password
         };
       case 'LOGOUT':
         return {};

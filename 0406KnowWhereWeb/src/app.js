@@ -25,6 +25,7 @@ const jsx = (
 );
 console.log('store.getState(): ', store.getState())
 console.log('state.user: ', state.user);
+window.store = store;
 //const jsx = (
 
   //<AppRouter />
