@@ -18,7 +18,7 @@ let axiosConfig = {
   withCredentials: false
 };
 
-export default class ContactsPage extends React.Component{
+class ContactsPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -48,6 +48,7 @@ export default class ContactsPage extends React.Component{
             <div>
             <PrivateHeader />
             ContactsPage
+            { console.log(this.props.username) }
             <button onClick={this.onClick}>button</button>
               {
                   this.state.friends.map((friend) => <li key={friend}> {friend} <Link to="/chat/:{friend}">CHAT</Link></li>)
@@ -56,3 +57,12 @@ export default class ContactsPage extends React.Component{
         );
     }
 }
+
+const mapStateToProps = state => ({
+    username:state.username,
+    password:state.password
+})
+
+
+
+export default connect(mapStateToProps)(ContactsPage);

@@ -20,7 +20,8 @@ class HomePage extends React.Component{
              <p className="header__login">Know Where Your Friends Are</p>
              <LogInForm 
                 onSubmit={(user)=>{
-                    this.props.dispatch(logIn(user));
+                    this.props.logIn(user);
+                    //console.log(user);
                     this.props.history.push('/profile')
                 }} />
              <Link to="/register">Register</Link>
