@@ -31,14 +31,14 @@ export default (state = userReducerDefaultState, action) => {
       case 'GET_USER':
         return {
           ...state,
-          email: state.email,
-          firstname: state.firstname,
-          lastname: state.lastname,
-          friends: state.friends,
-          groups: state.groups,
-          postText: state.postText,
-          coordinate: state.coordinate,
-          photoURL:state.photoURL
+          email: action.user.email,
+          firstname: action.user.firstname,
+          lastname: action.user.lastname,
+          friends: action.user.friends,
+          groups: action.user.groups,
+          postText: action.user.postText,
+          coordinate: action.user.coordinate,
+          photoURL:aciton.user.photoURL
         };
       default:
         return state;

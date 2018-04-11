@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
-axios.defaults.baseURL = 'http://143.215.114.174:8080';
+axios.defaults.baseURL = 'http://143.215.113.90:8080';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 

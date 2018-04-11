@@ -39,7 +39,7 @@ onUsernameChange(e) {
 }
 
 onPasswordChange(e) {
-    const passwor d= e.target.value;
+    const password= e.target.value;
     this.setState({ password });  
 }
 
@@ -102,4 +102,4 @@ onSubmit(e){
 
 
 
-export default HomePagetest);
+export default (HomePagetest);

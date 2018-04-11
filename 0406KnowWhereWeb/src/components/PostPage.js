@@ -7,7 +7,7 @@ import PostForm from './PostForm';
 import PrivateHeader from './PrivateHeader';
 
 
-axios.defaults.baseURL = 'http://143.215.114.174:8080';
+axios.defaults.baseURL = 'http://143.215.113.90:8080';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
@@ -31,12 +31,12 @@ let axiosConfig = {
 
 export default PostPage; */
 
-export default class PostPage extends React.Component {
+class PostPage extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            username: '',
+            username: props.username,
             postText: props.postText ? props.postText : '',
             lattitude: '',
             longitude: '',
@@ -118,3 +118,9 @@ export default class PostPage extends React.Component {
 
     }
 }
+
+const mapStateToProps = state => ({
+    username:state.user.username
+});
+
+export default connect(mapStateToProps)(PostPage);
