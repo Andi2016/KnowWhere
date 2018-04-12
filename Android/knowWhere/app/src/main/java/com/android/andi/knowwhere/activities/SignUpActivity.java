@@ -137,6 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void fetchUserDetails(String fName, String lName, String email) {
+        Log.e("createuser", "runhere");
         ServerAPI.createUser(mApp.getApplicationContext(), fName, lName, email, new ServerResponseCallback() {
             @Override
             public void onResponse(ServerResponseData response) {

@@ -30,7 +30,7 @@ public class ServerAPI {
     public static final int STATUS_OK = 200;
     public static final int STATUS_UNKNOWNERROR = -1;
 
-    public static final String SERVER_BASE_URL = "http://143.215.114.174:8080";
+    public static final String SERVER_BASE_URL = "http://143.215.113.90:8080";
 
     private static AsyncHttpClient client = null;
     private static PersistentCookieStore mCookieStore = null;

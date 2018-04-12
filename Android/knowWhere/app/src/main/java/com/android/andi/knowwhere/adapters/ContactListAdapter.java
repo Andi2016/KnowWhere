@@ -67,7 +67,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         //Contact contact = mContactList.get(position);
         String contact = mContactList.get(position);
         //change later
-        holder.mHeadImage.setImageResource(MainActivity.map.get(contact));
+        if(MainActivity.map.containsKey(contact)){
+            holder.mHeadImage.setImageResource(MainActivity.map.get(contact));
+        }else{
+            holder.mHeadImage.setImageResource(R.drawable.head_smith);
+        }
+
 
         holder.mNameView.setText(contact);
 

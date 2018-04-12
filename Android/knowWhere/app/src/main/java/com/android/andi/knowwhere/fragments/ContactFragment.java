@@ -25,6 +25,11 @@ import com.android.andi.knowwhere.models.Contact;
 import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -46,6 +51,8 @@ public class ContactFragment extends Fragment implements ContactListAdapter.Cont
         ContactFragment fragment = new ContactFragment();
         return fragment;
     }
+
+    private FirebaseDatabase mDatabase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,11 +77,62 @@ public class ContactFragment extends Fragment implements ContactListAdapter.Cont
         mUsername = bundle.getString("username");
 
         setupView();
+        list.clear();
         fetchFriends();
+
+        getFireBaseData();
 
 
 
         return view;
+    }
+
+    /**
+     * This function listen data change in firebase
+     */
+    private void getFireBaseData(){
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference test = mDatabase.getReference(mUsername).child("friend");
+
+        test.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                fetchFriends();
+                Log.e("chat", "addchanged");
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                fetchFriends();
+                Log.e("chat", "childchanged");
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                list.clear();
+                fetchFriends();
+                Log.e("lll3", "changed");
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                fetchFriends();
+                Log.e("lll4", "changed");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                list.clear();
+                fetchFriends();
+                Log.e("lll5", "changed");
+            }
+        });
+
+
     }
 
     /**
@@ -145,6 +203,7 @@ public class ContactFragment extends Fragment implements ContactListAdapter.Cont
         ServerAPI.getFriends(getActivity(), mUsername, new ServerResponseCallback() {
             @Override
             public void onResponse(ServerResponseData response) {
+                list.clear();
                 if(response.statusCode == ServerAPI.STATUS_OK){
                     Log.e("kk", response.responseData);
                     try{

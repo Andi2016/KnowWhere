@@ -64,7 +64,12 @@ public class  NearbyListAdapter extends RecyclerView.Adapter<NearbyListAdapter.V
     public void onBindViewHolder(NearbyListAdapter.ViewHolder holder, final int position) {
         Post post = mPostList.get(position);
         //change later
-        holder.mHeadImage.setImageResource(MainActivity.map.get(post.getUsername()));
+        if(MainActivity.map.containsKey(post.getUsername())){
+            holder.mHeadImage.setImageResource(MainActivity.map.get(post.getUsername()));
+        }else{
+            holder.mHeadImage.setImageResource(R.drawable.head_smith);
+        }
+
 
         holder.mNameView.setText(post.getUsername());
         DecimalFormat df = new DecimalFormat("0.00");

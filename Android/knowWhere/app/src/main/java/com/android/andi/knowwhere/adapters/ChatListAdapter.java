@@ -75,7 +75,11 @@ public class  ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewH
             name_display = chat.getGroupname().replaceAll("%7C","").replaceAll(mUser.getUsername(), "");
         }
         //change later
-        holder.mHeadImage.setImageResource(MainActivity.map.get(chat.getSender()));
+        if(MainActivity.map.containsKey(chat.getSender())){
+            holder.mHeadImage.setImageResource(MainActivity.map.get(chat.getSender()));
+        }else{
+            holder.mHeadImage.setImageResource(R.drawable.head_smith);
+        }
 
         holder.mNameView.setText(name_display);
         holder.mMessageView.setText(chat.getSender()+": "+ chat.getContent());

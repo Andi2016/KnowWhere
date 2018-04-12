@@ -68,7 +68,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         if(!chat.getSender().equals(mApp.getPreference().getUser(mApp).getUsername())){
             holder.mLeftLayoutView.setVisibility(View.VISIBLE);
             holder.mRightLayoutView.setVisibility(View.GONE);
-            holder.mLeftHeadImage.setImageResource(MainActivity.map.get(chat.getSender()));
+            if(MainActivity.map.containsKey(chat.getSender())){
+                holder.mLeftHeadImage.setImageResource(MainActivity.map.get(chat.getSender()));
+            }else{
+                holder.mLeftHeadImage.setImageResource(R.drawable.head_smith);
+            }
+
             holder.mSenderNameView.setText(chat.getSender());
             holder.mSenderMessageView.setText(chat.getContent());
 

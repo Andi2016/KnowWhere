@@ -25,6 +25,7 @@ import com.android.andi.knowwhere.models.Chat;
 import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,8 +64,7 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         return fragment;
     }
 
-    private DatabaseReference mDatabase;
-    private DatabaseReference FirebaseUser;
+    private FirebaseDatabase mDatabase;
 
 
 
@@ -91,16 +91,63 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         mUsername = bundle.getString("username");
 
         setupView();
+        list.clear();
         fetchAllGroups();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser = mDatabase.child(mUsername);
 
         getFireBaseData();
 
         //handler.postDelayed(task, 5000);
 
         return view;
+    }
+
+    /**
+     * This function listen data change in firebase
+     */
+    private void getFireBaseData(){
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference test = mDatabase.getReference(mUsername).child("message");
+
+        test.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                fetchAllGroups();
+                Log.e("chat", "changed");
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                fetchAllGroups();
+                Log.e("chat", "changed");
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                list.clear();
+                fetchAllGroups();
+                Log.e("lll3", "changed");
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                fetchAllGroups();
+                Log.e("lll4", "changed");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                list.clear();
+                fetchAllGroups();
+                Log.e("lll5", "changed");
+            }
+        });
+
+
     }
 
     /**
@@ -124,6 +171,7 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         ServerAPI.getGroupsByUsername(getActivity(), mUsername, new ServerResponseCallback() {
             @Override
             public void onResponse(ServerResponseData response) {
+                list.clear();
                 if(response.statusCode == ServerAPI.STATUS_OK){
                     Log.e("ddd", response.responseData+" ");
                     try{
@@ -149,24 +197,6 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
                         e.printStackTrace();
                     }
                 }
-            }
-        });
-    }
-
-    private void getFireBaseData(){
-
-
-        FirebaseUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                list.clear();
-                fetchAllGroups();
-                Log.e("firebase", "valuechanged");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
@@ -206,7 +236,6 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
                         }
                     }
                 });
-                FirebaseUser.setValue("aa");
             }
         })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {

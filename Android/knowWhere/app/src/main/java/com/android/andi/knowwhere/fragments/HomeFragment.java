@@ -21,6 +21,7 @@ import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerInterface;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -70,9 +71,14 @@ public class HomeFragment extends Fragment {
         mUsername = bundle.getString("username");
 
         mUsernameView.setText(mUsername);
-        getFireBaseData();
+        //getFireBaseData();
         Log.e("dfsf", mUsername+"  ");
-        mHeadView.setImageResource(MainActivity.map.get(mUsername));
+        if(MainActivity.map.containsKey(mUsername)){
+            mHeadView.setImageResource(MainActivity.map.get(mUsername));
+        }else{
+            mHeadView.setImageResource(MainActivity.map.get("Smith"));
+        }
+        //mHeadView.setImageResource(MainActivity.map.get(mUsername));
 
         getStatus();
 
@@ -128,23 +134,37 @@ public class HomeFragment extends Fragment {
 
     private void getFireBaseData(){
         mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference test = mDatabase.getReference("test");
+        DatabaseReference test = mDatabase.getReference("Alice");
 
-        test.setValue("hekko");
-
-        test.addValueEventListener(new ValueEventListener() {
+        test.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.e("lll", "changed");
+            }
 
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("firebase", "valuechanged");
-                mUsernameView.setText(dataSnapshot.getValue(String.class));
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.e("lll2", "changed");
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Log.e("lll3", "changed");
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                Log.e("lll4", "changed");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.e("lll5", "changed");
             }
         });
+
+
     }
 
 

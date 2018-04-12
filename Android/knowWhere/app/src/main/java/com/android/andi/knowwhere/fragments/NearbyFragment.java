@@ -38,6 +38,11 @@ import com.android.andi.knowwhere.models.User;
 import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -60,10 +65,14 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
     private double mLongitude;
     private ArrayList<Post> list = new ArrayList<>();
 
+    private FirebaseDatabase mDatabase;
+
     public static NearbyFragment newInstance() {
         NearbyFragment fragment = new NearbyFragment();
         return fragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,12 +96,15 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
         mUsername = bundle.getString("username");
 
         setupView();
+        list.clear();
         getNearbyInfo();
         //getCoordinate();
 
         //Alice - Clough
         mLongitude = -84.3962849;
         mLatitude = 33.7749203;
+
+        getFireBaseData();
 
         //Joe - Klaus
 //        mLongitude = -84.3962849;
@@ -103,6 +115,54 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
 //        mLatitude = 33.7755503;
 
         return view;
+    }
+
+    /**
+     * This function listen data change in firebase
+     */
+    private void getFireBaseData(){
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference test = mDatabase.getReference(mUsername);
+
+        test.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                getNearbyInfo();
+                Log.e("chat", "changed");
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                getNearbyInfo();
+                Log.e("chat", "changed");
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                list.clear();
+                getNearbyInfo();
+                Log.e("lll3", "changed");
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                list.clear();
+                getNearbyInfo();
+                Log.e("lll4", "changed");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                list.clear();
+                getNearbyInfo();
+                Log.e("lll5", "changed");
+            }
+        });
+
+
     }
 
     /**
@@ -189,6 +249,7 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
         ServerAPI.getPostsByUsername(getActivity(), mUsername, new ServerResponseCallback() {
             @Override
             public void onResponse(ServerResponseData response) {
+                list.clear();
                 if(response.statusCode == ServerAPI.STATUS_OK){
                     //postList.clear();
                     try{

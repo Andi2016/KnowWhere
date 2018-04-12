@@ -34,6 +34,7 @@ import com.android.andi.knowwhere.models.User;
 import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -64,16 +65,17 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
     private KnowWhere mApp;
     private User mUser;
 
-    private Handler handler = new Handler();
+//    private Handler handler = new Handler();
+//
+//    private Runnable task =new Runnable() {
+//        public void run() {
+//            handler.postDelayed(this,5*1000);
+//            fetchMessages();
+//        }
+//    };
 
-    private Runnable task =new Runnable() {
-        public void run() {
-            handler.postDelayed(this,5*1000);
-            fetchMessages();
-        }
-    };
+    private FirebaseDatabase mDatabase;
 
-    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -91,35 +93,58 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
         group_name = intent.getStringExtra("groupname");
 
         setUpActionBar();
-        //getFireBaseData();
         setupView();
         fetchMessages();
+        getFireBaseData();
         sendMessage();
 
         //temp
-       //handler.postDelayed(task, 5000);
+       //handler.postDelayed(task, 2000);
     }
 
     /**
-     * This function listens to new message
+     * This function listen data change in firebase
      */
-//    private void getFireBaseData(){
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        DatabaseReference firebaseUser = mDatabase.child("test");
-//        firebaseUser.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Log.e("change", "changed");
-//                fetchMessages();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+    private void getFireBaseData(){
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference test = mDatabase.getReference(mUser.getUsername());
+
+        test.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                fetchMessages();
+                Log.e("chat", "changed");
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                fetchMessages();
+                Log.e("chat", "changed");
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                fetchMessages();
+                Log.e("lll3", "changed");
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                fetchMessages();
+                Log.e("lll4", "changed");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                fetchMessages();
+                Log.e("lll5", "changed");
+            }
+        });
+
+
+    }
+
 
 
 
