@@ -3,7 +3,9 @@ import PrivateHeader from './PrivateHeader';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import axios from 'axios';
+import ChatPage from './ChatPage';
 
 axios.defaults.baseURL = 'http://143.215.113.90:8080';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
@@ -22,8 +24,8 @@ class ContactsPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            username: 'david',
-            friends:[]
+            username: props.username,
+            friends:['Joe', 'Tina']
         };
         this.onClick = this.onClick.bind(this);
     }
@@ -35,7 +37,7 @@ class ContactsPage extends React.Component{
         axios.get(`/user/${uname}/friend`, axiosConfig)
              .then((response)=>{
                  console.log(response);
-                 //console.log(response.data);
+                 console.log(response.data);
                  this.setState({ friends: response.data})
                  console.log(this.state.friends);
              })
@@ -53,9 +55,16 @@ class ContactsPage extends React.Component{
             ContactsPage
             {this.props.username}
             <button onClick={this.onClick}>button</button>
-              {
-                  this.state.friends.map((friend) => <li key={friend}> {friend} <Link to="/chat/:{friend}">CHAT</Link></li>)
-              }
+              
+            {
+                  this.state.friends.map((friend) => 
+                  <li key={friend}> {friend} 
+                    <ChatPage friendname={friend} />
+                    <Link to={
+                        `/chat/${username}`
+                    }>chat</Link>
+                    </li>)
+                }
             </div>
         );
     }

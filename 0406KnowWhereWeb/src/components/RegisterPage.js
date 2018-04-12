@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Fetch from 'react-fetch';
+import history from './history';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
   export default class RegisterPage extends React.Component {
@@ -66,8 +67,8 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
             firstname:this.state.firstname,
             lastname:this.state.lastname
         }; 
-        
-        axios.defaults.baseURL = 'http://143.215.114.174:8080';
+        console.log(user);
+        axios.defaults.baseURL = 'http://143.215.113.90:8080';
         axios.defaults.headers.get['Content-Type'] = 'application/json';
         axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
@@ -79,7 +80,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
         },
             withCredentials: true
         };
-        axios.post(`/user`, {user}, axiosConfig)
+        axios.post(`/user`, user, axiosConfig)
         .then(function(response) {
             console.log(response);
             console.log(response.data);
@@ -87,8 +88,12 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
         .catch(function(error){
             console.log(error);
         })
+        this.props.history.push('/');
     }
  
+    //onClick(){
+        //window.location.href = "./";
+    //}
     render() {
         return (
             <div>
