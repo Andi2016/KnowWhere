@@ -19,11 +19,12 @@ const AppRouter= () => (
   <Switch>
         <Route path="/" component={HomePage} exact={true} />
           <Route history={history} path="/nearby" component={NearbyPage} />
-          <Route history={history} path="/contacts" component={ContactsPage} />
+          <Route history={history} path="/contacts" component={ContactsPage}>
+            <Route history={history} path="/chat/:friend" component={ChatPage} />
+          </Route>
           <Route history={history} path="/post" component={PostPage} />
           <Route history={history} path="/register" component={RegisterPage} />
           <Route history={history} path="/profile" component={ProfilePage} />
-          <Route history={history} path="/chat" component={ChatPage} />
         </Switch>
     </div>
     </BrowserRouter>

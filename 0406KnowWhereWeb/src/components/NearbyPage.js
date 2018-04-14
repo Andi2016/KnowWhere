@@ -5,6 +5,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import NearbyItem from './NearbyItem';
 
 axios.defaults.baseURL = 'http://143.215.114.174:8080';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
@@ -23,62 +24,41 @@ class NearbyPage extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      username: 'david',
-      friends: [],
-      friendsPosts: {
-        friend: '',
-        friendPostText: '',
-        friendLocation:'',
-        friendStatus: ''
-      }
-    }
-    this.onClick = this.onClick.bind(this);
+      username: props.username? props.username : "",
+      nearbyArray: []
+    }    
   }
-  onClick(){
-    console.log("onClick");
+  componentDidMount(){
+    console.log("componentDidMount");
     
-    axios.get(`/user/${this.state.username}/friend`, axiosConfig)
+    axios.get(`/user/${this.state.username}/friendLocation`, axiosConfig)
          .then((response)=>{
-           this.setState({ friends: response.data});
+           console.log(response.data);
+           this.setState({ nearbyArray:response.data });
          })
          .catch((error)=>{
            console.log(error);
          })
-    console.log(this.state.friends);
-    
-    const friendslist =  this.state.friends;
-    
-//const friendslist = ["robert","michael","james","maria"];
-
-    friendslist.map((friend)=>{
-      axios.get(`/user/${friend}/whatsup`, axiosConfig)
-           .then((responser)=>{
-             this.setState({ friendsPosts: {
-               friend: {friend},
-               friendPostText: response.data
-             }})
-           })
-           .catch((error)=>{
-             console.log(error)
-           })
-    })
-    
-    friendlist.map((friend)=>{
-      axios.get(`/user/${friend}/`)
-    })
-    console.log(this.state.friendsPosts);
   }
+  
   render(){
     return (
       <div>
       <PrivateHeader />
       <p>NearbyPage</p>
-      <button onClick={this.onClick}>button</button>
+      {
+        this.state.nearbyArray.map((nearby) =>{
+          return <NearbyItem key={nearby.username}{...nearby} />
+          })
+      }    
     </div>
     );
   }
 }
     
+const mapStateToProps = state => ({
+    username: state.user.username
+  });
 
 
-export default NearbyPage;
+export default connect(mapStateToProps)(NearbyPage);

@@ -7,7 +7,7 @@ import { Router } from 'react-router-dom';
 import { getGroupname } from '../actions/userAction';
 import axios from 'axios';
 import ChatPage from './ChatPage';
-import { Router,Route,hashHistory} from 'react-router';  
+import { Route,hashHistory} from 'react-router';  
 
 axios.defaults.baseURL = 'http://143.215.113.90:8080';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
@@ -27,21 +27,22 @@ class ContactsPage extends React.Component{
         super(props);
         this.state = {
             username: props.username,
-            friends:['Joe', 'Tina']
+            friends:[]
         };
-        this.onClick = this.onClick.bind(this);
+        //this.onClick = this.onClick.bind(this);
     }
-    onClick(){
-        console.log("onClick")
+    componentDidMount(){
+        console.log("componentDidMount")
         
         const uname = this.state.username;
-        console.log(uname);
+        console.log("username: ",uname);
         axios.get(`/user/${uname}/friend`, axiosConfig)
              .then((response)=>{
                  console.log(response);
                  console.log(response.data);
                  this.setState({ friends: response.data})
-                 console.log(this.state.friends);
+                 //this.friendlist = response.data;
+                 console.log(this.friends);
              })
              .catch((error)=>{
                  console.log(error);
@@ -55,14 +56,15 @@ class ContactsPage extends React.Component{
             <PrivateHeader />
             ContactsPage
             {this.props.username}
-            <button onClick={this.onClick}>button</button>
               
             {
                   this.state.friends.map((friend) => 
-                  <li key={friend}>  
+                  <li key={friend}>  {friend}
                   
-                  <Link to={}>
+                  <Link to={`contacts/chat/${friend}`}>chat
+                
                   </Link>
+                  
                     </li>)
                 }
                 

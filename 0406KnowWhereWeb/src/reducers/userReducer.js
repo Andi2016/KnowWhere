@@ -14,7 +14,8 @@ const userReducerDefaultState = {
     },
     friends:[],
     groups:[],
-    photoURL: ''
+    photoURL: '',
+    nearbyArray: []
 };
 
 

@@ -44,17 +44,19 @@ class PostPage extends React.Component {
         };
         this.onTextChange = this.onTextChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onStatusChange = this.onStatusChange.bind(this);
-        this.onStatusSubmit = this.onStatusSubmit.bind(this);
+        //this.onStatusChange = this.onStatusChange.bind(this);
+        //this.onStatusSubmit = this.onStatusSubmit.bind(this);
+        this.handleStatus = this.handleStatus.bind(this);
     }
     onTextChange(e){
         const text = e.target.value;
         this.setState({ postText: text})
     }
+    /*
     onStatusChange(e){
         const status = e.target.value;
         this.setState({ status: status});
-    }
+    }*/
     onSubmit(e){
         e.preventDefault();
         console.log('onPostSubmit');
@@ -68,7 +70,21 @@ class PostPage extends React.Component {
              })
         console.log("whatsup: ", postText);
     }
-
+    handleStatus(e){
+        const status = e.target.value;
+        this.setState({
+            status: status
+        })
+        axios.put(`/user/${this.state.username}/status`, status, axiosConfig)
+             .then((response)=>{
+                 console.log(response);
+             })
+             .catch((error)=>{
+                 console.log(error);
+             })
+        console.log("status: ", status);
+    }
+   /*
     onStatusSubmit(e){
         e.preventDefault();
         const statusText = this.state.status
@@ -82,25 +98,17 @@ class PostPage extends React.Component {
             console.log(error);
         })
         console.log("status", statusText);
-    }
+    }*/
 
     render(){
         return (
             <div>           
             <PrivateHeader />
-            <form name="statusform" onSubmit={this.onStatusSubmit}>
-            <FormGroup controlId="postTextarea">
-            <FormControl type="text" 
-              componentClass="textarea" 
-              className="post-input"
-              placeholder="Choose status from online, offline, busy" 
-              value={this.state.status}
-              onChange={this.onStatusChange}
-            />
-            <Button type="submit" className="button">STATUS</Button> 
-            </FormGroup>
-            </form>
-           
+            <select name='status' value={this.state.status} onChange={this.handleStatus}>
+              <option value="status">Status</option>
+              <option value="online">Online</option>
+              <option value="offline">Offline</option>
+            </select>
             <form name="postform" onSubmit={this.onSubmit}>
             <FormGroup controlId="postTextarea">
             <FormControl type="text" 
@@ -124,3 +132,18 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(PostPage);
+
+/**
+ *             <form name="statusform" onSubmit={this.onStatusSubmit}>
+            <FormGroup controlId="postTextarea">
+            <FormControl type="text" 
+              componentClass="textarea" 
+              className="post-input"
+              placeholder="Choose status from online, offline, busy" 
+              value={this.state.status}
+              onChange={this.onStatusChange}
+            />
+            <Button type="submit" className="button">STATUS</Button> 
+            </FormGroup>
+            </form>
+ */
