@@ -40,6 +40,11 @@ export default (state = userReducerDefaultState, action) => {
           coordinate: action.user.coordinate,
           photoURL:aciton.user.photoURL
         };
+        case 'GET_GROUP':
+          return {
+            ...state,
+            firstname: action.text
+          }
       default:
         return state;
     }

@@ -1,5 +1,7 @@
 import React from 'react';
-import firebase from '../firebase/firebase';
+//import {firebase} from '../firebase/firebase';
+
+import { connect } from 'react-redux';
 
 
 class ChatPage extends React.Component{
@@ -8,18 +10,23 @@ class ChatPage extends React.Component{
         super(props);
         this.state = {
             username: props.username,
-            friendname: 'Bob'
+            firstname: props.firstname
         }
     }
 
     render(){
-        //const friendname = this.state.friendname;
-        //const friendname = this.props.params.friend;
+        const firstname = this.state.firstname;
+        const username = this.state.username;
         //console.log(friendname);
+        //const test = firebase.database().ref('/Alice'+'/message').once('value').then(function(snapshot){
+            //console.log(snapshot.val().content);
+        ///})
         return (
             <div>
             <p>ChatPage</p>
-            {console.log(friendname)}
+            {console.log(username)}
+            {console.log(firstname)}
+            
             </div>
         );
     }
@@ -27,8 +34,8 @@ class ChatPage extends React.Component{
 
 
 const mapStateToProps = state => ({
-    username: this.state.username
-    //friend: this.state.friend
+    username: state.user.username,
+    firstname: state.user.firstname
 });
 
 

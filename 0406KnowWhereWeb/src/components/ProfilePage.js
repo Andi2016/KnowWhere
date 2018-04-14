@@ -10,7 +10,7 @@ class ProfilePage extends React.Component{
         return (
             <div>
             <PrivateHeader />
-            <p>ProdfilePage</p>
+            <p>ChatPage</p>
             <p>{console.log("username: ", this.props.username)}</p>
             </div>
         );
