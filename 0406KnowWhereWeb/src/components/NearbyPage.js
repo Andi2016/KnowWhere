@@ -43,7 +43,7 @@ class NearbyPage extends React.Component{
          })
          .catch((error)=>{
            console.log(error);
-         })
+         });
     console.log(this.state.friends);
     
     const friendslist =  this.state.friends;

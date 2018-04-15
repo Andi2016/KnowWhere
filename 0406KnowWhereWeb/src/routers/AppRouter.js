@@ -9,7 +9,9 @@ import Header from '../components/Header';
 import RegisterPage from '../components/RegisterPage';
 import ProfilePage from '../components/ProfilePage';
 import ChatPage from '../components/ChatPage';
+import ChatWindow from '../components/ChatWindow';
 import history from '../components/history';
+import firebase from '../firebase/firebase';
 
 
 const AppRouter= () => (
@@ -24,6 +26,8 @@ const AppRouter= () => (
           <Route history={history} path="/register" component={RegisterPage} />
           <Route history={history} path="/profile" component={ProfilePage} />
           <Route history={history} path="/chat" component={ChatPage} />
+    <Route history={history} path="/chatWindow" component={ChatWindow} />
+
         </Switch>
     </div>
     </BrowserRouter>
