@@ -24,7 +24,7 @@ class NearbyPage extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      username: props.username? props.username : "",
+      username: props.username? props.username : "Alice",
       nearbyArray: []
     }    
   }

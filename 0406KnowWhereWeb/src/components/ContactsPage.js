@@ -26,7 +26,7 @@ class ContactsPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            username: props.username,
+            username: props.username? props.username: "Alice",
             friends:[]
         };
         //this.onClick = this.onClick.bind(this);
@@ -61,7 +61,7 @@ class ContactsPage extends React.Component{
                   this.state.friends.map((friend) => 
                   <li key={friend}>  {friend}
                   
-                  <Link to={`contacts/chat/${friend}`}>chat
+                  <Link to={`/chat/${friend}`}>chat
                 
                   </Link>
                   

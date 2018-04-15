@@ -1,5 +1,6 @@
 import React from 'react';
 //import {firebase} from '../firebase/firebase';
+import PrivateHeader from './PrivateHeader';
 
 import { connect } from 'react-redux';
 
@@ -23,10 +24,10 @@ class ChatPage extends React.Component{
         ///})
         return (
             <div>
+            <PrivateHeader />
             <p>ChatPage</p>
             {console.log(username)}
             {console.log(firstname)}
-            
             </div>
         );
     }

@@ -42,16 +42,32 @@ export default class LogInForm extends React.Component{
     onSubmit(e){
         e.preventDefault();
         const uname = this.state.username;
+        const pword = this.state.password;
+        console.log("input password: ", pword);
+        
         axios.get(`/user/${this.state.username}`, uname, axiosConfig)
              .then((response)=>{
-                console.log(response.status);
+                console.log(response.data);
+                //correctPassword = response.data.password;
+                this.setState({
+                    correctPassword: response.data.password
+                })
+                console.log(this.state.correctPassword);
              })
              .catch((error)=>{console.log(error)});
-        this.props.onSubmit({
-            username: this.state.username,
-            password: this.state.password
-        })
+        setTimeout((props) => {
+            console.log("Authenticating...");
+            if(this.state.password == this.state.correctPassword){
+                this.props.onSubmit({
+                    username: this.state.username,
+                    password: this.state.password
+                })
+            }else{
+                alert("please input correct password.");
+            }  
+        }, 1000);      
     }
+    
     render(){
         return (
             <form name="form" onSubmit={this.onSubmit}>              

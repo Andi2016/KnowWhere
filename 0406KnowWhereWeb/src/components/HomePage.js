@@ -22,7 +22,7 @@ class HomePage extends React.Component{
                 onSubmit={(user)=>{
                     this.props.logIn(user);
                     //console.log(user);
-                    this.props.history.push('/profile')
+                    this.props.history.push('/nearby')
                 }} />
              <Link to="/register">Register</Link>
             </div>

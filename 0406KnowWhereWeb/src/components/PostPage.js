@@ -37,16 +37,16 @@ class PostPage extends React.Component {
         super(props);
         this.state = {
             username: props.username,
-            postText: props.postText ? props.postText : '',
+            postText:{ whatsup: props.postText ? props.postText : ''},
             lattitude: '',
             longitude: '',
-            status: ''
+            status: { status: ''}
         };
         this.onTextChange = this.onTextChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        //this.onStatusChange = this.onStatusChange.bind(this);
-        //this.onStatusSubmit = this.onStatusSubmit.bind(this);
-        this.handleStatus = this.handleStatus.bind(this);
+        this.onStatusChange = this.onStatusChange.bind(this);
+        this.onStatusSubmit = this.onStatusSubmit.bind(this);
+        //this.handleStatus = this.handleStatus.bind(this);
     }
     onTextChange(e){
         const text = e.target.value;
@@ -70,45 +70,40 @@ class PostPage extends React.Component {
              })
         console.log("whatsup: ", postText);
     }
-    handleStatus(e){
+    onStatusChange(e){
         const status = e.target.value;
         this.setState({
             status: status
         })
-        axios.put(`/user/${this.state.username}/status`, status, axiosConfig)
-             .then((response)=>{
-                 console.log(response);
-             })
-             .catch((error)=>{
-                 console.log(error);
-             })
-        console.log("status: ", status);
+        console.log("update status: ", this.state.status);
     }
-   /*
+   
     onStatusSubmit(e){
         e.preventDefault();
         const statusText = this.state.status
-        console.log('onsubmit')
-        console.log(this.state.username);
-        axios.put(`/user/${this.state.username}/status`, statusText, axiosConfig)
+        console.log('onStatusSubmit')
+        axios.put(`/user/${this.state.username}/status`, {status: statusText}, axiosConfig)
         .then((response)=>{
             console.log(response);
         })
         .catch((error)=>{
             console.log(error);
         })
-        console.log("status", statusText);
-    }*/
+        console.log("status: ", statusText);
+    }
 
     render(){
         return (
             <div>           
             <PrivateHeader />
-            <select name='status' value={this.state.status} onChange={this.handleStatus}>
-              <option value="status">Status</option>
-              <option value="online">Online</option>
+            <form name="statusform" onSubmit={this.onStatusSubmit}>
+            <select name='status' value={this.state.status} onChange={this.onStatusChange}>
+              <option value="available">Online</option>
               <option value="offline">Offline</option>
             </select>
+            <Button type="submit" className="button">UpdateStatus</Button>
+            </form>
+
             <form name="postform" onSubmit={this.onSubmit}>
             <FormGroup controlId="postTextarea">
             <FormControl type="text" 
@@ -128,22 +123,9 @@ class PostPage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    username:state.user.username
+    username:state.user.username,
+    status: state.user.status
 });
 
 export default connect(mapStateToProps)(PostPage);
 
-/**
- *             <form name="statusform" onSubmit={this.onStatusSubmit}>
-            <FormGroup controlId="postTextarea">
-            <FormControl type="text" 
-              componentClass="textarea" 
-              className="post-input"
-              placeholder="Choose status from online, offline, busy" 
-              value={this.state.status}
-              onChange={this.onStatusChange}
-            />
-            <Button type="submit" className="button">STATUS</Button> 
-            </FormGroup>
-            </form>
- */

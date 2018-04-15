@@ -4,6 +4,7 @@ const userReducerDefaultState = {
     username: '',
     email: '',
     password: '',
+    correctPass:'',
     firstname:'',
     lastname:'', 
     postText:'',
