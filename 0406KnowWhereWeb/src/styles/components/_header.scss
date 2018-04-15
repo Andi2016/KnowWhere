@@ -1,0 +1,38 @@
+.header-define {
+  background: $dark-blue;
+  height: 80px;
+}
+
+.header__content {
+  text-align: top;
+  display: flex;
+  justify-content: space-between;
+  padding: $s-size 0;
+}
+
+.header__title {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  h1 {
+    margin: 0;
+  }
+}
+.header__login{
+  color: darkslategrey;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.header-private{
+  background: darkslategrey;
+  height: 40px;
+}
+
+.header-private__content{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}

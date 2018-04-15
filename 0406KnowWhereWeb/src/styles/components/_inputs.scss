@@ -1,0 +1,40 @@
+.text-input {
+  border: 1px solid #cacccd;
+  height: 30px;
+  width: 250px;
+  font-size: $font-size-small;
+  font-weight: 300;
+  padding: $s-size;
+}
+
+.post-input{
+  border: 1px solid #cacccd;
+  height: 50px;
+  width: 320px;
+  font-size: $font-size-small;
+  font-weight: 300;
+}
+.type-input{
+  border: 1px solid #cacccd;
+  height: 50px;
+  width: 350px;
+  font-size: $font-size-small;
+  font-weight: 300;
+  padding: $m-size;
+}
+.login-input{
+  border: 1px solid #cacccd;
+  height: 30px;
+  width: 200px;
+  font-size: $font-size-small;
+  font-weight: 300;
+  padding: $s-size;
+}
+.select {
+  @extend .text-input;
+}
+
+.textarea {
+  @extend .text-input;
+  height: 10rem;
+}
