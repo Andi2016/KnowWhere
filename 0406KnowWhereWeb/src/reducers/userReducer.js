@@ -48,6 +48,11 @@ export default (state = userReducerDefaultState, action) => {
             ...state,
             firstname: action.text
           }
+        case "UPDATE_GROUP":
+          return {
+            ...state,
+            firstname: action.payload
+          }
       default:
         return state;
     }

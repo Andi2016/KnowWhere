@@ -36,7 +36,7 @@ class PostPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            username: props.username,
+            username: props.username ? props.username : "Alice",
             postText:{ whatsup: props.postText ? props.postText : ''},
             lattitude: '',
             longitude: '',
@@ -61,7 +61,7 @@ class PostPage extends React.Component {
         e.preventDefault();
         console.log('onPostSubmit');
         const postText = this.state.postText;
-        axios.put(`/user/${this.state.username}/whatsup`, postText, axiosConfig)
+        axios.put(`/user/${this.state.username}/whatsup`, {whatsup: postText}, axiosConfig)
              .then((response)=>{
                  console.log(response);
              })

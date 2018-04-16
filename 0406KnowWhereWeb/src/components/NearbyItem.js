@@ -5,7 +5,7 @@ const NearbyItem = ({ username, whatsup, distance, photoUrl}) => (
   <Grid>
     <Row>
       <ListGroup className="list-item">
-         <ListGroupItem href={`/chat/${username}`} bsStyle="info">
+         <ListGroupItem href={`/ChatWindow`} bsStyle="info">
          <p>{username}  {Math.round(distance*100)/100}km </p>   
          <p>{whatsup} </p>      
          </ListGroupItem>      

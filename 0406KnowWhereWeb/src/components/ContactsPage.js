@@ -69,7 +69,7 @@ class ContactsPage extends React.Component{
             {
                   this.state.friends.map((friend) => 
                   <ListGroup className="list-item">
-                  <ListGroupItem href={`/chat/${friend}`}>
+                  <ListGroupItem href={`/ChatWindow`}>
                   <p>{friend}</p>   
                   </ListGroupItem>      
                 </ListGroup>)
@@ -77,7 +77,7 @@ class ContactsPage extends React.Component{
                 {
                     this.state.groups.map((group) => 
                     <ListGroup className="list-item">
-                    <ListGroupItem href={`/chat/${group}`}>
+                    <ListGroupItem href={`/ChatWindow`}>
                     <p>{group}</p>   
                     </ListGroupItem>      
                   </ListGroup>)
