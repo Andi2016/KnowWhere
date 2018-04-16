@@ -7,6 +7,7 @@ const userReducerDefaultState = {
     correctPass:'',
     firstname:'',
     lastname:'', 
+    groupname:'',
     postText:'',
     status: '',
     coordinate: {

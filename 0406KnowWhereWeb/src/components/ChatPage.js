@@ -36,7 +36,7 @@ class ChatPage extends React.Component{
 
 const mapStateToProps = state => ({
     username: state.user.username,
-    firstname: state.user.firstname
+    groupname: state.user.groupname
 });
 
 

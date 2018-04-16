@@ -1,0 +1,20 @@
+.option{
+    //background-color: darkslateblue;
+    border-bottom: 1px solid lighted($light-blue, 10%);
+    display: flex;
+    justify-content: space-between;
+    padding: $s-size $s-size; //leftright topdown
+}
+
+.option__text{
+    color: darkgray;
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0;
+    word-break: break-all;
+}
+
+.option_container{
+    height: 50px;
+    background-color: darkcyan;
+}

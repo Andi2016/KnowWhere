@@ -4,10 +4,11 @@ import { Button, Grid, Col, Row, Image, ListGroup, ListGroupItem } from "react-b
 const NearbyItem = ({ username, whatsup, distance, photoUrl}) => (
   <Grid>
     <Row>
-      <ListGroup>
-         <ListGroupItem href={`/chat/${username}`} header={`${username}: ${distance}km`}>
-         </ListGroupItem> 
-         <p>{whatsup}</p>        
+      <ListGroup className="list-item">
+         <ListGroupItem href={`/chat/${username}`} bsStyle="info">
+         <p>{username}  {Math.round(distance*100)/100}km </p>   
+         <p>{whatsup} </p>      
+         </ListGroupItem>      
        </ListGroup>
     </Row>
   </Grid>

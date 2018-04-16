@@ -17,10 +17,11 @@
 .list-item {
   border: 1px solid darken($off-white, 7%);
   border-top: none;
-  color: $dark-grey;
+  background-color: lightgray;
+  color: cornsilk;
   display: flex;
   flex-direction: column;
-  padding: $s-size;
+  padding: 0;
   text-decoration: none;
   transition: background .3s ease;
   &:hover {
@@ -30,7 +31,7 @@
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    padding: $m-size;
+    padding: $s-size;
   }
 }
 
@@ -47,6 +48,8 @@
 .list-item__title {
   margin: 0;
   word-break: break-all;
+  color: $grey;
+  font-size: $font-size-small;
 }
 
 .list-item__sub-title {

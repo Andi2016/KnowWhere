@@ -14,3 +14,11 @@
   font-weight: 100;
   text-align: left;
 }
+
+.content-container__list{
+  background-color: fade-out($color: #0d742c, $amount: 0.15);
+  height: 60px;
+  font: 100;
+  margin: 0;
+  padding:0;
+}

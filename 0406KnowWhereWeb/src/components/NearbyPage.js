@@ -45,7 +45,6 @@ class NearbyPage extends React.Component{
     return (
       <div>
       <PrivateHeader />
-      <p>NearbyPage</p>
       {
         this.state.nearbyArray.map((nearby) =>{
           return <NearbyItem key={nearby.username}{...nearby} />

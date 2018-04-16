@@ -1,6 +1,6 @@
 import React from 'react';
 import PrivateHeader from './PrivateHeader';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, ListGroup, ListGroupItem } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Router } from 'react-router-dom';
@@ -27,7 +27,8 @@ class ContactsPage extends React.Component{
         super(props);
         this.state = {
             username: props.username? props.username: "Alice",
-            friends:[]
+            friends:[],
+            groups:[]
         };
         //this.onClick = this.onClick.bind(this);
     }
@@ -47,26 +48,40 @@ class ContactsPage extends React.Component{
              .catch((error)=>{
                  console.log(error);
              })
+        axios.get(`/user/${uname}/group`, axiosConfig)
+             .then((response)=>{
+                 console.log(response);
+                 console.log(response.data);
+                 this.setState({ groups: response.data})
+                 //this.friendlist = response.data;
+                 console.log(this.groups);
+             })
+             .catch((error)=>{
+                 console.log(error);
+             })
     }
   
     render(){
         //let {friendslist} = this.state.friends;
         return (
             <div>
-            <PrivateHeader />
-            ContactsPage
-            {this.props.username}
-              
+            <PrivateHeader />          
             {
                   this.state.friends.map((friend) => 
-                  <li key={friend}>  {friend}
-                  
-                  <Link to={`/chat/${friend}`}>chat
-                
-                  </Link>
-                  
-                    </li>)
+                  <ListGroup className="list-item">
+                  <ListGroupItem href={`/chat/${friend}`}>
+                  <p>{friend}</p>   
+                  </ListGroupItem>      
+                </ListGroup>)
                 }
+                {
+                    this.state.groups.map((group) => 
+                    <ListGroup className="list-item">
+                    <ListGroupItem href={`/chat/${group}`}>
+                    <p>{group}</p>   
+                    </ListGroupItem>      
+                  </ListGroup>)
+                  }
                 
             </div>
         );
@@ -76,7 +91,7 @@ class ContactsPage extends React.Component{
 const mapStateToProps = state => ({
     username:state.user.username,
     password:state.user.password,
-    firstname: state.user.firstname
+    groupname: state.user.groupname
 })
 
 const mapDispatchToProps = (dispatch) => ({
