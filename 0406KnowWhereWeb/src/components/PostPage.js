@@ -96,14 +96,21 @@ class PostPage extends React.Component {
         return (
             <div>           
             <PrivateHeader />
+            <div className="content-container">
             <form name="statusform" onSubmit={this.onStatusSubmit}>
+            <div className="content-container">
             <select name='status' value={this.state.status} onChange={this.onStatusChange}>
               <option value="available">Online</option>
               <option value="offline">Offline</option>
             </select>
+            </div>
+            <div className="content-container">
             <Button type="submit" className="button">UpdateStatus</Button>
+            </div>
             </form>
+            </div>
 
+            <div className="content-container">
             <form name="postform" onSubmit={this.onSubmit}>
             <FormGroup controlId="postTextarea">
             <FormControl type="text" 
@@ -116,6 +123,7 @@ class PostPage extends React.Component {
             <Button type="submit" className="button">ShareYourPost</Button> 
             </FormGroup>
             </form>
+            </div>
             </div>
         );
 
