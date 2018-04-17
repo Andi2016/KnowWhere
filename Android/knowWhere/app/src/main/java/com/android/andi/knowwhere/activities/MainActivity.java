@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private KnowWhere mApp;
     private User mUser;
 
+    /**
+     * Temp method to manage local-saved head images
+     */
     public static Map<String, Integer> map = new HashMap<>();
 
 
@@ -117,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportActionBar().setTitle("Contact");
                     break;
                 case 3:
-                    getSupportActionBar().setTitle("Nearby Posts");
+                    getSupportActionBar().setTitle("Nearby Friends");
                     break;
                 case 4:
                     getSupportActionBar().setTitle("Chat");

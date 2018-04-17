@@ -1,6 +1,9 @@
 package com.android.andi.knowwhere.adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import com.android.andi.knowwhere.activities.MainActivity;
 import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Contact;
 import com.android.andi.knowwhere.models.Post;
+import com.android.andi.knowwhere.utils.BitmapToRound;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -68,6 +72,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         String contact = mContactList.get(position);
         //change later
         if(MainActivity.map.containsKey(contact)){
+            //Bitmap bitmap = BitmapToRound.bitmapToRound(BitmapFactory.decodeResource(BitmapToRound.drawableToBitmap(R)MainActivity.map.get(contact)));
             holder.mHeadImage.setImageResource(MainActivity.map.get(contact));
         }else{
             holder.mHeadImage.setImageResource(R.drawable.head_smith);

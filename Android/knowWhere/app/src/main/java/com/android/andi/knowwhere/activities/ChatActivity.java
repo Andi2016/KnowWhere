@@ -98,7 +98,7 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
         getFireBaseData();
         sendMessage();
 
-        //temp
+        //temp method for real-time data retrieving
        //handler.postDelayed(task, 2000);
     }
 

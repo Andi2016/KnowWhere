@@ -4,7 +4,7 @@
     <!-- Strings related bottom to navigation -->
     <string name="item_1">Home</string>
     <string name="item_2">Contacts</string>
-    <string name="item_3">Nearby</string>
+    <string name="item_3">NearbyPosts</string>
     <string name="item_4">Chats</string>
 
 </resources>

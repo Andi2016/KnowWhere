@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class ContactFragment extends Fragment implements ContactListAdapter.Cont
 
     //UI references
     private RecyclerView mRecyclerView;
+    private Button mButtonView;
 
     private String mUsername;
     private ContactListAdapter mAdapter;
@@ -65,8 +67,16 @@ public class ContactFragment extends Fragment implements ContactListAdapter.Cont
         View view =inflater.inflate(R.layout.activity_contact_fragment, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.contact_recycler_view);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_contact);
-        fab.setOnClickListener(new View.OnClickListener() {
+//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_contact);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                addFriend();
+//            }
+//        });
+
+        mButtonView = view.findViewById(R.id.button_contact);
+        mButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addFriend();

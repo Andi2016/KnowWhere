@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_home"
     tools:context="com.android.andi.knowwhere.fragments.ContactFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_contact"
         android:layout_gravity="end"
         android:layout_width="wrap_content"
@@ -23,6 +24,18 @@
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:backgroundTint="@color/primary_dark"
-        app:srcCompat="@mipmap/ic_add" />
+        app:srcCompat="@mipmap/ic_add" />-->
+
+    <Button
+        android:id="@+id/button_contact"
+        android:background="@drawable/rounded_button"
+        android:text="Add Friend"
+        android:textColor="#ffffff"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

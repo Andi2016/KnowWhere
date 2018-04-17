@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.andi.knowwhere.R;
@@ -56,6 +57,7 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
 
     private ChatListAdapter mAdapter;
     private RecyclerView mRecyclerView;
+    private Button mButtonView;
 
     private ArrayList<Chat> list = new ArrayList<>();
 
@@ -79,8 +81,16 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         View view =inflater.inflate(R.layout.activity_chat_fragment, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.chat_recycler_view);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_chat);
-        fab.setOnClickListener(new View.OnClickListener() {
+//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_chat);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                createGroup();
+//            }
+//        });
+
+        mButtonView = view.findViewById(R.id.button_chat);
+        mButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createGroup();

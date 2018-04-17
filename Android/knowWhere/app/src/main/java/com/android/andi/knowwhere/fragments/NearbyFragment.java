@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
 
     private NearbyListAdapter mAdapter;
     private RecyclerView mRecyclerView;
+    private Button mButtonView;
 
     private LocationManager locationManager;
     private String provider;
@@ -83,14 +85,22 @@ public class NearbyFragment extends Fragment implements NearbyListAdapter.Nearby
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_nearby_fragment, container, false);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                sendPost();
+//            }
+//        });
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.nearby_recycler_view);
+        mButtonView = view.findViewById(R.id.button_nearby);
+        mButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendPost();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.nearby_recycler_view);
 
         Bundle bundle = getArguments();
         mUsername = bundle.getString("username");

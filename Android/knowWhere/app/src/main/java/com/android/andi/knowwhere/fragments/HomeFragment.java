@@ -1,6 +1,8 @@
 package com.android.andi.knowwhere.fragments;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.android.andi.knowwhere.servers.ServerAPI;
 import com.android.andi.knowwhere.servers.ServerInterface;
 import com.android.andi.knowwhere.servers.ServerResponseCallback;
 import com.android.andi.knowwhere.servers.ServerResponseData;
+import com.android.andi.knowwhere.utils.BitmapToRound;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -74,9 +77,11 @@ public class HomeFragment extends Fragment {
         //getFireBaseData();
         Log.e("dfsf", mUsername+"  ");
         if(MainActivity.map.containsKey(mUsername)){
-            mHeadView.setImageResource(MainActivity.map.get(mUsername));
+            Bitmap bitmap = BitmapToRound.bitmapToRound(BitmapFactory.decodeResource(getResources(), MainActivity.map.get(mUsername)));
+            mHeadView.setImageBitmap(bitmap);
         }else{
-            mHeadView.setImageResource(MainActivity.map.get("Smith"));
+            Bitmap bitmap = BitmapToRound.bitmapToRound(BitmapFactory.decodeResource(getResources(), MainActivity.map.get("Smith")));
+            mHeadView.setImageBitmap(bitmap);
         }
         //mHeadView.setImageResource(MainActivity.map.get(mUsername));
 
