@@ -1,6 +1,6 @@
 import React from 'react';
 import PrivateHeader from './PrivateHeader';
-import { Button, FormGroup, FormControl, ControlLabel, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, ListGroup, ListGroupItem, Image } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Router } from 'react-router-dom';
@@ -37,24 +37,13 @@ class ContactsPage extends React.Component{
         
         const uname = this.state.username;
         console.log("username: ",uname);
-        axios.get(`/user/${uname}/friend`, axiosConfig)
+        axios.get(`/user/${uname}/friendObject`, axiosConfig)
              .then((response)=>{
                  console.log(response);
                  console.log(response.data);
                  this.setState({ friends: response.data})
                  //this.friendlist = response.data;
                  console.log(this.friends);
-             })
-             .catch((error)=>{
-                 console.log(error);
-             })
-        axios.get(`/user/${uname}/group`, axiosConfig)
-             .then((response)=>{
-                 console.log(response);
-                 console.log(response.data);
-                 this.setState({ groups: response.data})
-                 //this.friendlist = response.data;
-                 console.log(this.groups);
              })
              .catch((error)=>{
                  console.log(error);
@@ -70,7 +59,7 @@ class ContactsPage extends React.Component{
                   this.state.friends.map((friend) => 
                   <ListGroup className="list-item">
                   <ListGroupItem href={`/ChatWindow`}>
-                  <p>{friend}</p>   
+                  <p><Image src = {friend.photoUrl} class="img-fluid" alt="Responsive image" width={50}/>        {friend.username}</p>
                   </ListGroupItem>      
                 </ListGroup>)
                 }

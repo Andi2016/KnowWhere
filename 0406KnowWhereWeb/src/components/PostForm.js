@@ -45,7 +45,7 @@ export default class PostForm extends React.Component{
              .catch((error)=>{
                  console.log(error);
              })
-             //console.log(navigator.geolocation.getCurrentPosition);
+        console.log("location: ", navigator.geolocation.getCurrentPosition);
     }
     render(){
         return (

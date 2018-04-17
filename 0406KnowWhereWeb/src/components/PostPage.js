@@ -116,7 +116,7 @@ class PostPage extends React.Component {
             <FormControl type="text" 
               componentClass="textarea" 
               className="post-input"
-              placeholder="Share your post in this area. " 
+              
               value={this.state.postText}
               onChange={this.onTextChange}
             />
