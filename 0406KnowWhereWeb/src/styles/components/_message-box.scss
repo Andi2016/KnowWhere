@@ -1,0 +1,27 @@
+.left_message {
+  position: relative;
+  left: 30px;
+  background: $dark-blue;
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  height: 20vh;
+  justify-content: center;
+  width: 50vw;
+  color: white;
+  margin-top: 10vh;
+}
+
+.right_message {
+  margin-left: 200px;
+  background: $dark-blue;
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  height: 20vh;
+  justify-content: center;
+  width: 50vw;
+  color: white;
+  margin-top: 10vh;
+}
+

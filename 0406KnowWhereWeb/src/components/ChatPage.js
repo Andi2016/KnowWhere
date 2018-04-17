@@ -46,7 +46,8 @@ class ChatPage extends React.Component{
 
     onClick(groupname) {
        this.props.updateGroup(groupname);
-       console.log(this.props.firstname);
+       console.log('chatpage groupname: ', this.props.groupname);
+       console.log('chatpage firstname: ', this.props.firstname);
        this.props.history.push("/ChatWindow");
     }
 

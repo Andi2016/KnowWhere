@@ -1,5 +1,4 @@
 import React from 'react';
-import NearbyList from './NearbyList';
 import PrivateHeader from './PrivateHeader';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { connect } from 'react-redux';

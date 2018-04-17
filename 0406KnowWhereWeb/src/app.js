@@ -6,6 +6,7 @@ import userReducer from './reducers/userReducer';
 import storeConfig from './store/storeConfig';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+import 'react-chat-elements/dist/main.css';
 
 const store = storeConfig();
 
