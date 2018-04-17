@@ -51,12 +51,13 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/rounded_green"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
+            android:textColor="@color/colorPrimary"
             android:text="Login"/>
 
         <TextView android:id="@+id/sign_up_button"

@@ -85,13 +85,14 @@
 
             <!-- Signup Button -->
             <android.support.v7.widget.AppCompatButton
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/rounded_green"
                 android:id="@+id/btn_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
+                android:textColor="@color/colorPrimary"
                 android:text="Create Account"/>
 
 
