@@ -1,11 +1,12 @@
 /**
  * Created by dwyane on 4/14/18.
  */
-import React, { Component } from 'react';
+import React from 'react';
 import PrivateHeader from './PrivateHeader';
 import firebase from '../firebase/firebase';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { Input, Button, MessageBox } from 'react-chat-elements';
 
 axios.defaults.baseURL = 'http://143.215.113.90:8080';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
@@ -20,23 +21,19 @@ let axiosConfig = {
     withCredentials: false
 };
 
-class ChatWindow extends Component {
+class ChatWindow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fromUser: 'Alice',
-            toUser: 'Bob',
-            groupname: 'Alice|Bob',
             messages: [],
             group: props.firstname
         };
         this.addMessage = this.addMessage.bind(this);
     }
     componentWillMount() {
-        let messageRef = firebase.database().ref(`/${this.state.fromUser}/message`);
+        let messageRef = firebase.database().ref(`/${this.props.username}/message`);
         messageRef.on('child_added', () => {
-            //let groupname = snapshot.val().groupname;
-            axios.get(`/group/${this.state.groupname}/chat`, axiosConfig)
+            axios.get(`/group/${this.props.firstname}/chat`, axiosConfig)
                 .then((response) => {
                     this.setState({messages: response.data});
                 })
@@ -47,8 +44,8 @@ class ChatWindow extends Component {
     }
     addMessage(e){
         e.preventDefault();
-        let msg = {"sender": "Alice", "groupname": "Alice|Bob", "content": this.inputEl.value};
-        axios.post(`/group/${this.state.groupname}/chat`, msg, axiosConfig)
+        let msg = {"sender": this.props.username, "groupname": this.props.firstname, "content": this.inputEl.value};
+        axios.post(`/group/${this.props.firstname}/chat`, msg, axiosConfig)
             .then((response) => {
                 console.log('submitted');
                 this.inputEl.value = '';
@@ -59,18 +56,30 @@ class ChatWindow extends Component {
     }
     render() {
       const group = this.state.group;
-        return (
+      console.log('chatwindow username: ', this.props.username);
+      console.log('chatwindow firstname: ', this.props.firstname);
+
+      return (
             <div>
-                {console.log(this.state.group)}
                 <PrivateHeader />
                 <form onSubmit={this.addMessage}>
-                    <input type="text" ref={ el => this.inputEl = el} />
+                <div className="post-input">
+                    <input className="post-input" type="text" ref={ el => this.inputEl = el} />
                     <input type="submit"/>
-                    <ul>
+                </div>
+                    <div>
                         { /* Render the list of messages */
-                            this.state.messages.map( message => <li key={message.timeStamp}>{message.content}</li> )
+                            this.state.messages.reverse().map( message => {
+                                let position = message.sender === this.props.username ? 'right' : 'left';
+                                return <MessageBox
+                                    position={position}
+                                    type={'text'}
+                                    text={message.sender + ': ' +message.content}
+                                    date = {new Date(message.timeStamp)}
+                                    />
+                        })
                         }
-                    </ul>
+                    </div>
                 </form>
             </div>
         );

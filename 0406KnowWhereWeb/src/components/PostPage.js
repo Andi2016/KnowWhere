@@ -96,12 +96,12 @@ class PostPage extends React.Component {
         return (
             <div>           
             <PrivateHeader />
-            <div className="content-container">
+            <div>
             <form name="statusform" onSubmit={this.onStatusSubmit}>
             <div className="content-container">
             <select name='status' value={this.state.status} onChange={this.onStatusChange}>
-              <option value="available">Online</option>
-              <option value="offline">Offline</option>
+            <option value="available">Online</option>
+            <option value="offline">Offline</option>
             </select>
             </div>
             <div className="content-container">
@@ -110,7 +110,7 @@ class PostPage extends React.Component {
             </form>
             </div>
 
-            <div className="content-container">
+            <div className="box-layout">
             <form name="postform" onSubmit={this.onSubmit}>
             <FormGroup controlId="postTextarea">
             <FormControl type="text" 

@@ -7,10 +7,10 @@
   "scripts": {
     "serve": "live-server public/",
     "build:dev": "webpack",
-    "build:prod":"webpack -p --env production",
+    "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
-    "start":"node server/server.js",
-    "heroku-postbuild":"npm run build:prod"
+    "start": "node server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -31,6 +31,7 @@
     "react": "^15.6.1",
     "react-addons-shallow-compare": "15.6.0",
     "react-bootstrap": "^0.32.1",
+    "react-chat-elements": "^0.9.0",
     "react-dates": "12.3.0",
     "react-dom": "^15.6.1",
     "react-fetch": "0.0.9",
