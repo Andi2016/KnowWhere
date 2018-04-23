@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         map.put("Bob", R.drawable.head_bob);
         map.put("Smith", R.drawable.head_smith);
         map.put("Jane", R.drawable.head_jane);
+        map.put("June", R.drawable.head_june);
 
         final Bundle bundle = new Bundle();
         bundle.putString("username", mUser.getUsername());

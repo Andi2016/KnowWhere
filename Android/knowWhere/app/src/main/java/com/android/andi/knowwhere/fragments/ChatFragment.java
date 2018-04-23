@@ -49,7 +49,7 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
 
     private Runnable task =new Runnable() {
         public void run() {
-            handler.postDelayed(this,5*1000);
+            handler.postDelayed(this,2*1000);
             list.clear();
             fetchAllGroups();
         }
@@ -101,13 +101,13 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
         mUsername = bundle.getString("username");
 
         setupView();
-        list.clear();
+        //list.clear();
         fetchAllGroups();
 
 
-        getFireBaseData();
+        //getFireBaseData();
 
-        //handler.postDelayed(task, 5000);
+        handler.postDelayed(task, 1000);
 
         return view;
     }

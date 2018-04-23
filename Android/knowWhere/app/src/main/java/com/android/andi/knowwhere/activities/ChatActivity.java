@@ -65,14 +65,14 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
     private KnowWhere mApp;
     private User mUser;
 
-//    private Handler handler = new Handler();
-//
-//    private Runnable task =new Runnable() {
-//        public void run() {
-//            handler.postDelayed(this,5*1000);
-//            fetchMessages();
-//        }
-//    };
+    private Handler handler = new Handler();
+
+    private Runnable task =new Runnable() {
+        public void run() {
+            handler.postDelayed(this,1*1000);
+            fetchMessages();
+        }
+    };
 
     private FirebaseDatabase mDatabase;
 
@@ -95,11 +95,11 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
         setUpActionBar();
         setupView();
         fetchMessages();
-        getFireBaseData();
+        //getFireBaseData();
         sendMessage();
 
         //temp method for real-time data retrieving
-       //handler.postDelayed(task, 2000);
+       handler.postDelayed(task, 1000);
     }
 
     /**
@@ -113,32 +113,27 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 fetchMessages();
-                Log.e("chat", "changed");
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 fetchMessages();
-                Log.e("chat", "changed");
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 fetchMessages();
-                Log.e("lll3", "changed");
 
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
                 fetchMessages();
-                Log.e("lll4", "changed");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 fetchMessages();
-                Log.e("lll5", "changed");
             }
         });
 
@@ -198,7 +193,7 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.Me
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //handler.removeCallbacks(task);
+                handler.removeCallbacks(task);
                 finish();
                 break;
             case R.id.action_invite:

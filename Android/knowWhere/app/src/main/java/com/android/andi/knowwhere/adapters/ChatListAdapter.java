@@ -1,6 +1,8 @@
 package com.android.andi.knowwhere.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.android.andi.knowwhere.application.KnowWhere;
 import com.android.andi.knowwhere.models.Chat;
 import com.android.andi.knowwhere.models.User;
 import com.android.andi.knowwhere.utils.Basics;
+import com.android.andi.knowwhere.utils.BitmapToRound;
 
 import java.sql.Timestamp;
 import java.text.ParseException;

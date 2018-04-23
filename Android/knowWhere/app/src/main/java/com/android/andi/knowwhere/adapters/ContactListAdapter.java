@@ -22,6 +22,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.android.andi.knowwhere.R.id.head_contact;
+
 /**
  * Created by Andi Xu on 4/7/18.
  */
@@ -72,7 +74,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         String contact = mContactList.get(position);
         //change later
         if(MainActivity.map.containsKey(contact)){
-            //Bitmap bitmap = BitmapToRound.bitmapToRound(BitmapFactory.decodeResource(BitmapToRound.drawableToBitmap(R)MainActivity.map.get(contact)));
+            //Bitmap bitmap = BitmapToRound.bitmapToRound(BitmapFactory.decodeResource(Resources.getSystem(), MainActivity.map.get(contact)));
             holder.mHeadImage.setImageResource(MainActivity.map.get(contact));
         }else{
             holder.mHeadImage.setImageResource(R.drawable.head_smith);
@@ -100,7 +102,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         private ImageView mHeadImage;
         private TextView mNameView;
 
-        public ViewHolder(final View view){
+        public ViewHolder(View view){
             super(view);
             mHeadImage = view.findViewById(R.id.head_contact);
             mNameView = view.findViewById(R.id.name_contact);

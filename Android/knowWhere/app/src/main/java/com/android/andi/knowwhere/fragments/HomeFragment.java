@@ -137,41 +137,4 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void getFireBaseData(){
-        mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference test = mDatabase.getReference("Alice");
-
-        test.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.e("lll", "changed");
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.e("lll2", "changed");
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.e("lll3", "changed");
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                Log.e("lll4", "changed");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("lll5", "changed");
-            }
-        });
-
-
-    }
-
-
-
 }
