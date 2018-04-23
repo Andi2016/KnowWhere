@@ -261,10 +261,14 @@ public class ChatFragment extends Fragment implements ChatListAdapter.ChatListAd
     @Override
     public void OnClick(int position) {
         Intent intent = new Intent(getActivity(), ChatActivity.class);
-        String group_name = list.get(position).getGroupname();
-        intent.putExtra("groupname", group_name);
-        Log.e("nearbysend", group_name);
-        startActivity(intent);
+        if(list.size()!=0){
+            String group_name = list.get(position).getGroupname();
+            intent.putExtra("groupname", group_name);
+            Log.e("nearbysend", group_name);
+            startActivity(intent);
+            handler.removeCallbacks(task);
+        }
+
     }
 
 
